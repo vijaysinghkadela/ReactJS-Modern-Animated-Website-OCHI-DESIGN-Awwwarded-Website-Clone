@@ -11,7 +11,7 @@ function LandingPage() {
               <div className="w-fit flex items-center mx-20 overflow-hidden">
                 {index === 1 && (<div className="w-[8vw] h-[5.5vw] mx-5 
                  relative rounded-md bg-red-600"></div>)}
-                <h1 className="uppercase text-[7.5vw] leading-[7vw] tracking-tighter font-medium font-['Bebas Neue']">
+                <h1 className="uppercase text-[7.5vw] leading-[7vw] tracking-tighter font-bold font-['Bebas Neue']">
                   {item}
                 </h1>
               </div>
