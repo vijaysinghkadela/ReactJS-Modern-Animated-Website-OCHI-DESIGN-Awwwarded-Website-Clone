@@ -1,10 +1,17 @@
-import { motion } from "framer-motion";
+import { delay, motion, useAnimation } from "framer-motion";
 
-import { Power4 } from "gsap";
-import { useState } from "react";
+import { Power4 } from "gsap/all";
 
 function Featured() {
-  const [isHovering, setHovering] = useState(0);
+  const cards = [useAnimation(), useAnimation()];
+  const handleHover = () => {
+    cards[index].start({ y: "0" });
+  };
+  const handleHoverEnd = () => {
+    cards[index].start({ y: "100%" });
+  };
+  const index = 0;
+
   return (
     <div className="w-full py-20">
       <div className="w-full px-20 border-b-[2px] border-zinc-700 pb-20 ">
@@ -14,20 +21,23 @@ function Featured() {
       </div>
       <div className="px-20">
         <div className="cards gap-10 mt-20 w-full flex items-center justify-between">
-          <div
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
+          <motion.div
+            onHoverStart={() => handleHover(0)}
+            onHoverEnd={() => handleHoverEnd(0)}
             className="cardContainer relative w-1/2 h-[75vh]  "
           >
-            <h1 className="absolute flex left-full top-1/2 -translate-x-1/2 -translate-y-1/2 text-[#CDEA68] font-semibold  leading-none z-[9] text-8xl font-['Bebas Neue'] overflow-hidden ">
+            <h1 className="absolute flex right-0 top-1/2 translate-x-1/2 -translate-y-1/2 text-[#CDEA68] font-semibold  leading-none z-[9] text-8xl font-['Bebas Neue'] overflow-hidden ">
               {"FYDE".split("").map((item, index) => (
                 <>
                   <motion.span
                     initial={{ y: "100%" }}
-                    animate={isHovering ? { y: "0" } : { y: "100%" }}
-                    transition={{ ease: Power4.easeInOut, delay: index * 0.1 }}
-                    key={index}
+                    animate={cards[0]}
+                    transition={{
+                      ease: [0.22, 1, 0.36, 1],
+                      delay: index * 0.05,
+                    }}
                     className="inline-block"
+                    key={index}
                   >
                     {item}
                   </motion.span>
@@ -41,25 +51,25 @@ function Featured() {
                 alt=""
               />
             </div>
-          </div>
-          <div
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
+          </motion.div>
+          <motion.div
+            onHoverStart={() => handleHover(1)}
+            onHoverEnd={() => handleHoverEnd(1)}
             className="cardContainer relative w-1/2 h-[75vh] "
           >
             <div className="card w-full h-full rounded-xl relative ">
-              <h1 className="absolute flex right-full top-1/2 translate-x-1/2 -translate-y-1/2 text-[#CDEA68] font-semibold overflow-hidden  leading-none z-[9] text-8xl font-['Bebas Neue'] ">
+              <h1 className="absolute flex left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[#CDEA68] font-semibold overflow-hidden  leading-none z-[9] text-8xl font-['Bebas Neue'] ">
                 {"VISE".split("").map((item, index) => (
                   <>
                     <motion.span
                       initial={{ y: "100%" }}
-                      animate={isHovering ? { y: "0" } : { y: "100%" }}
+                      animate={cards[1]}
                       transition={{
-                        ease: Power4.easeInOut,
-                        delay: index * 0.1,
+                        ease: [0.22, 1, 0.36, 1],
+                        delay: index * 0.05,
                       }}
-                      key={index}
                       className="inline-block"
+                      key={index}
                     >
                       {item}
                     </motion.span>
@@ -72,7 +82,7 @@ function Featured() {
                 alt=""
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
